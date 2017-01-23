@@ -14,6 +14,8 @@
 #include <string.h>
 #define WK_DEBUG_LOG_FILE "/tmp/wk_debug.log"
 
+void wk_debug(const char *format, ...);
+
 void wk_debug(const char *format, ...)
 {
 	FILE *f ;
@@ -2148,12 +2150,15 @@ static Sint remote_send(Process *p, DistEntry *dep,
     return res;
 }
 
+// wkpo
+#define DEBUG 1
 #include "erl_debug.h"
+
 
 Sint
 do_send(Process *p, Eterm to, Eterm msg, Eterm *refp, ErtsSendContext* ctx)
 {
-    Eterm portid;
+    Eterm portid, wkpo;
     Port *pt;
     Process* rp;
     DistEntry *dep;
@@ -2354,7 +2359,7 @@ do_send(Process *p, Eterm to, Eterm msg, Eterm *refp, ErtsSendContext* ctx)
 	    rp_locks |= ERTS_PROC_LOCK_MAIN;
 #endif
 	/* send to local process */
-  Eterm wkpo = build_stacktrace(p, p->ftrace);
+  wkpo = build_stacktrace(p, p->ftrace);
   ps(p, &wkpo);
   
 	res = erts_send_message(p, rp, &rp_locks, msg, 0); // TODO wkpo aqui
