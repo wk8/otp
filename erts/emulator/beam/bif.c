@@ -2049,6 +2049,10 @@ ebif_bang_2(BIF_ALIST_2)
 
 Sint do_send(Process *p, Eterm to, Eterm msg, Eterm *refp, ErtsSendContext*);
 
+#include <stdio.h>
+#include <stdlib.h>
+
+
 static Sint remote_send(Process *p, DistEntry *dep,
 			Eterm to, Eterm full_to, Eterm msg,
 			ErtsSendContext* ctx)
@@ -2306,8 +2310,10 @@ do_send(Process *p, Eterm to, Eterm msg, Eterm *refp, ErtsSendContext* ctx)
 	    rp_locks |= ERTS_PROC_LOCK_MAIN;
 #endif
 	/* send to local process */
-  wkpo = build_stacktrace(p, p->ftrace);
-  erts_printf("%.*T\n", INT_MAX, wkpo);
+  if (getenv("WKPO_PRINT_STACK")) {
+    wkpo = build_stacktrace(p, p->ftrace);
+    erts_printf("%.*T\n", INT_MAX, wkpo);
+  }
   
 	res = erts_send_message(p, rp, &rp_locks, msg, 0); // TODO wkpo aqui
 	if (erts_use_sender_punish)
