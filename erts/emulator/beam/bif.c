@@ -2103,7 +2103,6 @@ static Sint remote_send(Process *p, DistEntry *dep,
 }
 
 // wkpo
-#define DEBUG 1
 #ifdef HAVE_CONFIG_H
 #  include "config.h"
 #endif
