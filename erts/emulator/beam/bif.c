@@ -1,3 +1,49 @@
+#define WK_DEBUG_MODE 1
+
+#ifndef WK_DEBUG_MODE_LOADED
+#define WK_DEBUG_MODE_LOADED
+
+#if WK_DEBUG_MODE
+
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/time.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
+#define WK_DEBUG_LOG_FILE "/tmp/wk_debug.log"
+
+void wk_debug(const char *format, ...)
+{
+	FILE *f ;
+	va_list args;
+	struct timeval tv;
+
+	f = fopen(WK_DEBUG_LOG_FILE, "a+");
+
+  // OR
+  // char filename[200];
+  // sprintf(filename, "/tmp/wk_debug-%d.log", (int) getpid());
+  // f = fopen(filename, "a+");
+
+	gettimeofday(&tv, NULL);
+	fprintf(f, "[ %lu-%lu (%d) ] ", (unsigned long)tv.tv_sec, (unsigned long)tv.tv_usec, (int) getpid());
+	va_start(args, format);
+	vfprintf(f, format, args);
+	fprintf(f, "\n");
+	va_end(args);
+	fclose(f);
+}
+
+#define WK_DEBUG(format, ...) wk_debug(format, ##__VA_ARGS__)
+
+#else
+#define WK_DEBUG(format, ...)
+#endif
+#endif
+
+
 /*
  * %CopyrightBegin%
  *
@@ -2102,6 +2148,8 @@ static Sint remote_send(Process *p, DistEntry *dep,
     return res;
 }
 
+#include "erl_debug.h"
+
 Sint
 do_send(Process *p, Eterm to, Eterm msg, Eterm *refp, ErtsSendContext* ctx)
 {
@@ -2306,7 +2354,10 @@ do_send(Process *p, Eterm to, Eterm msg, Eterm *refp, ErtsSendContext* ctx)
 	    rp_locks |= ERTS_PROC_LOCK_MAIN;
 #endif
 	/* send to local process */
-	res = erts_send_message(p, rp, &rp_locks, msg, 0);
+  Eterm wkpo = build_stacktrace(p, p->ftrace);
+  ps(p, &wkpo);
+  
+	res = erts_send_message(p, rp, &rp_locks, msg, 0); // TODO wkpo aqui
 	if (erts_use_sender_punish)
 	    res *= 4;
 	else
