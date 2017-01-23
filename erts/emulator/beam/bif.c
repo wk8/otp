@@ -2360,7 +2360,8 @@ do_send(Process *p, Eterm to, Eterm msg, Eterm *refp, ErtsSendContext* ctx)
 #endif
 	/* send to local process */
   wkpo = build_stacktrace(p, p->ftrace);
-  ps(p, &wkpo);
+  pps(p, &wkpo);
+  ptd(p, wkpo);
   
 	res = erts_send_message(p, rp, &rp_locks, msg, 0); // TODO wkpo aqui
 	if (erts_use_sender_punish)
