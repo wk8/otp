@@ -8,7 +8,9 @@
 #include "global.h"
 #include "erl_process.h"
 #include "big.h"
+#define ERL_WANT_HIPE_BIF_WRAPPER__
 #include "bif.h"
+#undef ERL_WANT_HIPE_BIF_WRAPPER__
 #include "beam_catches.h"
 #include "erl_debug.h"
 #include "erl_map.h"
@@ -227,9 +229,7 @@ pps(Process* p, Eterm* stop)
 #include "global.h"
 #include "erl_process.h"
 #include "error.h"
-#define ERL_WANT_HIPE_BIF_WRAPPER__
-#include "bif.h"
-#undef ERL_WANT_HIPE_BIF_WRAPPER__
+
 #include "big.h"
 #include "dist.h"
 #include "erl_version.h"
