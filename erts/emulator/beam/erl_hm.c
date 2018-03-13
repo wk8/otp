@@ -28,11 +28,11 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0){
   Eterm* hp;
   hashmap_t *hm;
 
-  hp = HAlloc(BIF_P, (HASHMAP_HEADER_SZ + 1));
+  hp = HAlloc(BIF_P, (HASHMAP_HEADER_SZ + 99)); // TODO wkpo +1 ?
 
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HASHMAP;
-  // hm->value = NULL; // TODO wkpo
+  hm->value = am_ok; // TODO wkpo
 
   BIF_RET(make_hashmap(hm));
 }
