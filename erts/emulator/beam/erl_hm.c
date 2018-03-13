@@ -32,9 +32,9 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0){
   // TODO wkpo needed ce truc?
   *hp++ = make_arityval(0);
 
-  mp = (hashmap_t*)hp;
-  mp->thing_word = HEADER_HASHMAP;
-  mp->value = NULL;
+  hm = (hashmap_t*)hp;
+  hm->thing_word = HEADER_HASHMAP;
+  hm->value = NULL;
 
-  BIF_RET(make_hashmap(mp));
+  BIF_RET(make_hashmap(hm));
 }
