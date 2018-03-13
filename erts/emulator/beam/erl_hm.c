@@ -41,3 +41,5 @@ BIF_RETTYPE hm_get_1(BIF_ALIST_1) {
   hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_1);
   BIF_RET(hm->value);
 }
+// TODO wkpo
+// hm:get(hm:new()).
