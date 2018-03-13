@@ -1,5 +1,5 @@
 -module(hm).
 
--export([coucou/0]).
+-export([new/0]).
 
-coucou() -> po.
+new() -> erlang:nif_error(undefined).
