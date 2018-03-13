@@ -15,7 +15,7 @@
 #undef ERL_WANT_HIPE_BIF_WRAPPER__
 
 BIF_RETTYPE hm_new_0(BIF_ALIST_0){
-  BIF_RET(am_ok);
+  BIF_RET(mkatom("coucou po"));
 }
 
 
