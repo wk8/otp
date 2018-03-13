@@ -24,7 +24,7 @@ static Eterm mkatom(const char *str)
     return am_atom_put(str, sys_strlen(str));
 }
 
-BIF_RETTYPE hm_new_0(BIF_ALIST_0){
+BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
   Eterm* hp;
   hashmap_t *hm;
 
@@ -37,4 +37,7 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0){
   BIF_RET(make_hashmap(hm));
 }
 
-
+BIF_RETTYPE hm_get_1(BIF_ALIST_1) {
+  hm = (hashmap_t *)hashmap_val(BIF_ARG_1);
+  BIF_RET(hm->value);
+}

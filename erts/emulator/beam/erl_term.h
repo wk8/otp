@@ -1180,6 +1180,7 @@ _ET_DECLARE_CHECKED(struct erl_node_*,external_ref_node,Eterm)
 #define flatmap_val(x)                (_unchecked_boxed_val((x)))
 
 #define make_hashmap(x)               make_boxed((Eterm*)(x))
+#define hashmap_val(x)                (_unchecked_boxed_val((x)))
 
 #define is_map_header(x)       (((x) & (_TAG_HEADER_MASK)) == _TAG_HEADER_MAP)
 #define is_map(x)              (is_boxed((x)) && is_map_header(*boxed_val(x)))
