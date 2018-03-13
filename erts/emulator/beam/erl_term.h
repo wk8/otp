@@ -139,7 +139,7 @@ struct erl_node_; /* Declared in erl_node_tables.h */
 #define EXTERNAL_PORT_SUBTAG	(0xD << _TAG_PRIMARY_SIZE) /* EXTERNAL_PORT */
 #define EXTERNAL_REF_SUBTAG	(0xE << _TAG_PRIMARY_SIZE) /* EXTERNAL_REF */
 #define MAP_SUBTAG		(0xF << _TAG_PRIMARY_SIZE) /* MAP */
-#define HASHMAP_SUBTAG		(0x10 << _TAG_PRIMARY_SIZE) /* HASHMAP */
+#define HM_SUBTAG		(0x10 << _TAG_PRIMARY_SIZE) /* HASHMAP */
 
 
 #define _TAG_HEADER_ARITYVAL       (TAG_PRIMARY_HEADER|ARITYVAL_SUBTAG)
@@ -157,7 +157,7 @@ struct erl_node_; /* Declared in erl_node_tables.h */
 #define _TAG_HEADER_EXTERNAL_REF   (TAG_PRIMARY_HEADER|EXTERNAL_REF_SUBTAG)
 #define _TAG_HEADER_BIN_MATCHSTATE (TAG_PRIMARY_HEADER|BIN_MATCHSTATE_SUBTAG)
 #define _TAG_HEADER_MAP	           (TAG_PRIMARY_HEADER|MAP_SUBTAG)
-#define _TAG_HEADER_HASHMAP	       (TAG_PRIMARY_HEADER|HASHMAP_SUBTAG)
+#define _TAG_HEADER_HM	       (TAG_PRIMARY_HEADER|HM_SUBTAG)
 
 
 #define _TAG_HEADER_MASK	0x3F
@@ -1179,8 +1179,8 @@ _ET_DECLARE_CHECKED(struct erl_node_*,external_ref_node,Eterm)
 #define is_flatmap_header(x)          (((x) & (_HEADER_MAP_SUBTAG_MASK)) == HAMT_SUBTAG_HEAD_FLATMAP)
 #define flatmap_val(x)                (_unchecked_boxed_val((x)))
 
-#define make_hashmap(x)               make_boxed((Eterm*)(x))
-#define hashmap_val(x)                (_unchecked_boxed_val((x)))
+#define make_hm(x)               make_boxed((Eterm*)(x))
+#define hm_val(x)                (_unchecked_boxed_val((x)))
 
 #define is_map_header(x)       (((x) & (_TAG_HEADER_MASK)) == _TAG_HEADER_MAP)
 #define is_map(x)              (is_boxed((x)) && is_map_header(*boxed_val(x)))

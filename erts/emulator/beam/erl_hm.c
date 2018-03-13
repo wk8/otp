@@ -28,16 +28,16 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
   Eterm* hp;
   hashmap_t *hm;
 
-  hp = HAlloc(BIF_P, (HASHMAP_HEADER_SZ + 2)); // TODO wkpo +1 ?
+  hp = HAlloc(BIF_P, (HM_HEADER_SIZE + 2)); // TODO wkpo +1 ?
 
   hm = (hashmap_t*)hp;
-  hm->thing_word = HEADER_HASHMAP;
+  hm->thing_word = HEADER_HM;
   hm->value = mkatom("coucou"); // TODO wkpo
 
-  BIF_RET(make_hashmap(hm));
+  BIF_RET(make_hm(hm));
 }
 
 BIF_RETTYPE hm_get_1(BIF_ALIST_1) {
-  hm = (hashmap_t *)hashmap_val(BIF_ARG_1);
+  hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_1);
   BIF_RET(hm->value);
 }
