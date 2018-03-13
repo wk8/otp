@@ -86,6 +86,7 @@ MODULES= \
 	gen_fsm \
 	gen_server \
 	gen_statem \
+	hm \
 	io \
 	io_lib \
 	io_lib_format \
