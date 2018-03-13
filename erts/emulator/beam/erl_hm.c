@@ -10,6 +10,8 @@
 #include "bif.h"
 #include "erl_binary.h"
 
+#include <Judy.h>
+
 #define ERL_WANT_HIPE_BIF_WRAPPER__
 #include "bif.h"
 #undef ERL_WANT_HIPE_BIF_WRAPPER__
