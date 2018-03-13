@@ -103,6 +103,7 @@
              unicode_util,
 	     uri_string,
 	     win32reg,
+	     ht,
 	     zip]},
   {registered,[timer_server,rsh_starter,take_over_monitor,pool_master,
                dets]},
