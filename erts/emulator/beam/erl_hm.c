@@ -2,6 +2,7 @@
 #  include "config.h"
 #endif
 
+#include "erl_eterm.h"
 #include "erl_process.h"
 #define ERL_WANT_HIPE_BIF_WRAPPER__
 #include "bif.h"
