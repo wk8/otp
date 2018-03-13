@@ -2,7 +2,9 @@
 #  include "config.h"
 #endif
 
+#include "sys.h"
 #include "erl_vm.h"
+#include "global.h"
 #include "erl_process.h"
 #define ERL_WANT_HIPE_BIF_WRAPPER__
 #include "bif.h"
