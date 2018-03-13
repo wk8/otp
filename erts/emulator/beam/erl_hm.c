@@ -32,7 +32,7 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0){
 
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HASHMAP;
-  hm->value = am_ok; // TODO wkpo
+  hm->value = mkatom("coucou"); // TODO wkpo
 
   BIF_RET(make_hashmap(hm));
 }
