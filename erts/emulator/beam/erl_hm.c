@@ -29,12 +29,10 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0){
   hashmap_t *hm;
 
   hp = HAlloc(BIF_P, (HASHMAP_HEADER_SZ + 1));
-  // TODO wkpo needed ce truc?
-  *hp++ = make_arityval(0);
 
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HASHMAP;
-  hm->value = NULL;
+  // hm->value = NULL; // TODO wkpo
 
   BIF_RET(make_hashmap(hm));
 }
