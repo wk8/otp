@@ -28,7 +28,7 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0){
   Eterm* hp;
   hashmap_t *hm;
 
-  hp = HAlloc(BIF_P, (HASHMAP_HEADER_SZ + 99)); // TODO wkpo +1 ?
+  hp = HAlloc(BIF_P, (HASHMAP_HEADER_SZ + 2)); // TODO wkpo +1 ?
 
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HASHMAP;
@@ -36,3 +36,5 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0){
 
   BIF_RET(make_hashmap(hm));
 }
+
+
