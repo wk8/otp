@@ -37,6 +37,7 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
   hm->thing_word = HEADER_HM;
   // hm->j_array = (Pvoid_t) NULL;
 
+  BIF_RET(mkatom("coucou3"));
   BIF_RET(make_hm(hm));
 }
 
