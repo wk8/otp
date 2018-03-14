@@ -17,7 +17,7 @@
 #include "bif.h"
 #undef ERL_WANT_HIPE_BIF_WRAPPER__
 
-# include "erl_hm.h"
+#include "erl_hm.h"
 
 #define WK_DEBUG_MODE 1
 

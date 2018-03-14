@@ -31,6 +31,7 @@
 #include "erl_gc.h"
 #include "big.h"
 #include "erl_map.h"
+#include "erl_hm.h"
 #include "erl_binary.h"
 #include "erl_bits.h"
 #include "dtrace-wrapper.h"
@@ -192,9 +193,7 @@ Uint size_object_x(Eterm obj, erts_literal_area_t *litopt)
 		    }
 		    break;
     case HM_SUBTAG:
-      {
-        return 200; // TODO wkpo
-      }
+      return HM_HEADER_SIZE; // TODO wkpo?
 		case SUB_BINARY_SUBTAG:
 		    {
 			Eterm real_bin;
