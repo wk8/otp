@@ -91,37 +91,36 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   Eterm value = BIF_ARG_2;
   Eterm* p_value = &value;
 
+  // TODO wkpo
+  Sint i = signed_val(value);
+  WK_DEBUG("on va set value %d", i);
+  Sint* pi;
+
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
   // TODO wkpo ca marche pas cette histoire la, collisions?
   WK_DEBUG("avant set %d", hm->j_array);
-  JLI(p_value, hm->j_array, hash);
-  WK_DEBUG("apres set %d and %d and %d", hm->j_array, p_value, is_atom(*p_value));
-
-  // TODO wkpo
-  Sint i = signed_val(value);
-  WK_DEBUG("apres set value %d", i);
+  JLI(pi, hm->j_array, hash);
+  WK_DEBUG("apres set %d", hm->j_array);
 
   BIF_RET(BIF_ARG_3);
 }
 
 BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
-  Eterm* result, wkpo;
+  Sint* pi;
   hashmap_t* hm;
 
   hm = (hashmap_t*)hm_val(BIF_ARG_2);
   WK_DEBUG("avant get %d", hm->j_array);
 
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
-  JLG(result, hm->j_array, hash);
-  WK_DEBUG("apres get %d and %d and %d", hm->j_array, result, is_atom(*result));
-  wkpo = *result;
+  JLG(pi, hm->j_array, hash);
+  WK_DEBUG("apres get %d", hm->j_array);
 
   // TODO wkpo NEXT: theorie: en fait le pointer vers l'arg est bon que la durée du call... regarder comment les flatmaps font? est-ce qu'on peut copier?
   // TODO wkpo
-  Sint i = signed_val(wkpo);
-  WK_DEBUG("apres get value %d", i);
+  WK_DEBUG("apres get value %d", *pi);
 
-  BIF_RET(wkpo);
+  BIF_RET(make_small(*pi));
 }
 // TODO wkpo
 // hm:get(wk, hm:set(wk, 28, hm:new())).
