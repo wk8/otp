@@ -98,9 +98,8 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   WK_DEBUG("apres set %d and %d and %d", hm->j_array, p_value, is_atom(*p_value));
 
   // TODO wkpo
-  FloatDef a;
-  GET_DOUBLE(value, a);
-  WK_DEBUG("apres set value %f", a.fdw);
+  Sint i = signed_val(value);
+  WK_DEBUG("apres set value %d", i);
 
   BIF_RET(BIF_ARG_3);
 }
@@ -117,15 +116,15 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
   WK_DEBUG("apres get %d and %d and %d", hm->j_array, result, is_atom(*result));
   wkpo = *result;
 
+  // TODO wkpo NEXT: theorie: en fait le pointer vers l'arg est bon que la durée du call... regarder comment les flatmaps font? est-ce qu'on peut copier?
   // TODO wkpo
-  FloatDef a;
-  GET_DOUBLE(wkpo, a);
-  WK_DEBUG("apres set value %f", a.fdw);
+  Sint i = signed_val(value);
+  WK_DEBUG("apres get value %d", i);
 
   BIF_RET(wkpo);
 }
 // TODO wkpo
-// hm:get(wk, hm:set(wk, 0.28, hm:new())).
+// hm:get(wk, hm:set(wk, 28, hm:new())).
 
 //// Below: timing for Judy
 
