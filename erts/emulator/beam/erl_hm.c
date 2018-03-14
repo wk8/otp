@@ -9,6 +9,7 @@
 #include "error.h"
 #include "bif.h"
 #include "erl_binary.h"
+#include "erl_map.h"
 
 #include <Judy.h>
 
@@ -30,18 +31,35 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
   Eterm* hp;
   hashmap_t *hm;
 
+  BIF_RET(mkatom("coucou"));
+
   hp = HAlloc(BIF_P, (HM_HEADER_SIZE + 2)); // TODO wkpo +1 ?
 
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HM;
-  hm->value = mkatom("coucou"); // TODO wkpo
+  // hm->j_array = (Pvoid_t) NULL;
 
   BIF_RET(make_hm(hm));
 }
 
-BIF_RETTYPE hm_get_1(BIF_ALIST_1) {
-  hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_1);
-  BIF_RET(hm->value);
+BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
+  hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_3);
+
+  Uint32 hash = hashmap_make_hash(BIF_ARG_1);
+  // TODO wkpo ca marche pas cette histoire la, collisions?
+  // JLI(BIF_ARG_2, hm->j_array, hash);
+
+  // TODO wkpo renvoyer la map plutot? BIF_RET(BIF_ARG_3) ?
+  BIF_RET(am_ok);
+}
+
+BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
+  Eterm result;
+  hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_2);
+
+  Uint32 hash = hashmap_make_hash(BIF_ARG_1);
+  // JLG(result, hm->j_array, hash);
+  BIF_RET(result);
 }
 // TODO wkpo
 // hm:get(hm:new()).
