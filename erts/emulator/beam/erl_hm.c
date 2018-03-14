@@ -88,11 +88,12 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
 
 BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_3);
+  Eterm value = BIF_ARG_2;
 
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
   // TODO wkpo ca marche pas cette histoire la, collisions?
   WK_DEBUG("avant set %d", hm->j_array);
-  JLI(&BIF_ARG_2, hm->j_array, hash);
+  JLI(&value, hm->j_array, hash);
   WK_DEBUG("apres set %d", hm->j_array);
 
   BIF_RET(BIF_ARG_3);
