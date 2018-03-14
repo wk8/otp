@@ -94,7 +94,7 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   // TODO wkpo
   Sint i = signed_val(value);
   WK_DEBUG("on va set value %d", i);
-  Sint* pi;
+  Sint* pi = &i;
 
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
   // TODO wkpo ca marche pas cette histoire la, collisions?
