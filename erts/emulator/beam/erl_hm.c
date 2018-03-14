@@ -35,6 +35,7 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
 
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HM;
+  hm->value = mkatom("coucou po");
   // hm->j_array = (Pvoid_t) NULL;
 
   // BIF_RET(mkatom("coucou3")); // TODO wkpo
