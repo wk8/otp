@@ -19,6 +19,51 @@
 
 # include "erl_hm.h"
 
+#define WK_DEBUG_MODE 1
+
+#ifndef WK_DEBUG_MODE_LOADED
+#define WK_DEBUG_MODE_LOADED
+
+#if WK_DEBUG_MODE
+
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/time.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
+#define WK_DEBUG_LOG_FILE "/tmp/wk_debug.log"
+
+void wk_debug(const char *format, ...)
+{
+	FILE *f ;
+	va_list args;
+	struct timeval tv;
+
+	f = fopen(WK_DEBUG_LOG_FILE, "a+");
+
+  // OR
+  // char filename[200];
+  // sprintf(filename, "/tmp/wk_debug-%d.log", (int) getpid());
+  // f = fopen(filename, "a+");
+
+	gettimeofday(&tv, NULL);
+	fprintf(f, "[ %lu-%lu (%d) ] ", (unsigned long)tv.tv_sec, (unsigned long)tv.tv_usec, (int) getpid());
+	va_start(args, format);
+	vfprintf(f, format, args);
+	fprintf(f, "\n");
+	va_end(args);
+	fclose(f);
+}
+
+#define WK_DEBUG(format, ...) wk_debug(format, ##__VA_ARGS__)
+
+#else
+#define WK_DEBUG(format, ...)
+#endif
+#endif
+
 // TODO wkpo fix identation....
 
 // TODO wkpo used?
@@ -36,6 +81,7 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HM;
   hm->j_array = (Pvoid_t) NULL;
+  WK_DEBUG("apres creation %d", hm->j_array);
 
   BIF_RET(make_hm(hm));
 }
@@ -45,7 +91,9 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
 
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
   // TODO wkpo ca marche pas cette histoire la, collisions?
+  WK_DEBUG("avant set %d", hm->j_array);
   JLI(BIF_ARG_2, hm->j_array, hash);
+  WK_DEBUG("apres set %d", hm->j_array);
 
   // TODO wkpo renvoyer la map plutot? BIF_RET(BIF_ARG_3) ?
   BIF_RET(am_ok);
@@ -53,10 +101,12 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
 
 BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
   Eterm result;
+  WK_DEBUG("avant get %d", hm->j_array);
   hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_2);
 
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
   JLG(result, hm->j_array, hash);
+  WK_DEBUG("apres get %d", hm->j_array);
   BIF_RET(result);
 }
 // TODO wkpo
