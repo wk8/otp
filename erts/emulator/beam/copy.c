@@ -191,6 +191,10 @@ Uint size_object_x(Eterm obj, erts_literal_area_t *litopt)
 			    erts_exit(ERTS_ABORT_EXIT, "size_object: bad hashmap type %d\n", MAP_HEADER_TYPE(hdr));
 		    }
 		    break;
+    case HM_SUBTAG:
+      {
+        return 200; // TODO wkpo
+      }
 		case SUB_BINARY_SUBTAG:
 		    {
 			Eterm real_bin;

@@ -60,7 +60,7 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
   BIF_RET(result);
 }
 // TODO wkpo
-// hm:get(hm:new()).
+// hm:get(wk, hm:set(wk, po, hm:new())).
 
 //// Below: timing for Judy
 
