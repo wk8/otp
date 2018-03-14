@@ -75,7 +75,7 @@ Random(uint32_t Seed) // produce 2^32 -1 numbers by different counting
  return(Seed);
 }
 // Hash Table ======================================================
-Pvoid_t JArray[HASHSIZE] = { NULL }; // Declare static hash table
+Pvoid_t JArray = (Pvoid_t) NULL;
 
 BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
   Eterm* hp;
@@ -87,7 +87,6 @@ BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
   Word_t *PValue;
   Word_t NumIndexes = 10000; // default first parameter
  // Load up the CPU cache for small measurements:
-  for (Count = 0; Count < HASHSIZE; Count++) JArray[Count] = NULL;
  printf("Begin storing %lu random numbers in a Judy scalable hash array\n",
   NumIndexes);
   Index = INITN;
@@ -95,7 +94,7 @@ BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
   for (Count = 0; Count < NumIndexes; Count++)
   {
   Index = Random(Index);
-  JLI(PValue, JArray[Index % HASHSIZE], Index); 
+  JLI(PValue, JArray, Index); 
   *PValue += 1; // bump count of duplicate Indexes
    }
    ENDTm;
@@ -106,7 +105,7 @@ BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
    for (Count = 0; Count < NumIndexes; Count++)
    {
    Index = Random(Index);
-   JLG(PValue, JArray[Index % HASHSIZE], Index);
+   JLG(PValue, JArray, Index);
    if (*PValue != 1)
   printf("%lu dups of %lu\n", *PValue - 1, Index);
    }
