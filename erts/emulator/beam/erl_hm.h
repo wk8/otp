@@ -8,7 +8,7 @@ typedef struct hashmap_s {
     Pvoid_t j_array;
 } hashmap_t;
 
-#define HM_HEADER_SIZE  (sizeof(hashmap_t) / sizeof(Eterm))
+#define HM_HEADER_SIZE  ((sizeof(hashmap_t) / sizeof(Eterm)) + 3) // TODO wkpo +1 ?
 #define HEADER_HM	_make_header(HM_HEADER_SIZE, _TAG_HEADER_HM)
 
 #endif

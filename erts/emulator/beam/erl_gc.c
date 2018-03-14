@@ -1458,6 +1458,8 @@ do_minor(Process *p, ErlHeapFragment *live_hf_end,
 	 char *mature, Uint mature_size,
 	 Uint new_sz, Eterm* objv, int nobj)
 {
+  // TODO wkpo!!
+  return;
     Rootset rootset;            /* Rootset for GC (stack, dictionary, etc). */
     Roots* roots;
     Eterm* n_htop;

@@ -76,7 +76,7 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
   Eterm* hp;
   hashmap_t *hm;
 
-  hp = HAlloc(BIF_P, (HM_HEADER_SIZE + 3)); // TODO wkpo +1 ?
+  hp = HAlloc(BIF_P, HM_HEADER_SIZE);
 
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HM;
@@ -125,7 +125,10 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
   BIF_RET(result == NULL ? am_undefined : *result);
 }
 // TODO wkpo
-// hm:get(wk, hm:set(wk, 28, hm:new())).
+/*
+hm:get(wk, hm:set(wk, 28, hm:new())).
+hm:get(po, hm:set(po, <<"coucou">>, hm:set(wk, 28, hm:new()))).
+*/
 
 //// Below: timing for Judy
 
