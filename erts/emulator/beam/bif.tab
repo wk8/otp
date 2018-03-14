@@ -702,3 +702,4 @@ bif ets:whereis/1
 
 bif hm:new/0
 bif hm:get/1
+bif hm:wk/0

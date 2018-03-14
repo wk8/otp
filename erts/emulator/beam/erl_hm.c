@@ -45,3 +45,17 @@ BIF_RETTYPE hm_get_1(BIF_ALIST_1) {
 }
 // TODO wkpo
 // hm:get(hm:new()).
+
+BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
+  Eterm* hp;
+  Eterm res;
+  FloatDef a1;
+
+  hp = HAlloc(BIF_P, FLOAT_SIZE_OBJECT);
+  res = make_float(hp);
+
+  FLOAT_VAL_GET_DOUBLE(0.28, a);
+  PUT_DOUBLE(a, hp);
+
+  BIF_RET(res);
+}
