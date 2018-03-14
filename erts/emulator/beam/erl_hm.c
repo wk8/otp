@@ -101,7 +101,7 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
 }
 
 BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
-  Eterm* result;
+  Eterm* result, wkpo;
   hashmap_t* hm;
 
   hm = (hashmap_t*)hm_val(BIF_ARG_2);
@@ -110,7 +110,8 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
   JLG(result, hm->j_array, hash);
   WK_DEBUG("apres get %d and %d and %d", hm->j_array, result, is_atom(*result));
-  BIF_RET(*result);
+  wkpo = *result;
+  BIF_RET(wkpo);
 }
 // TODO wkpo
 // hm:get(wk, hm:set(wk, po, hm:new())).
