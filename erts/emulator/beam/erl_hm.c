@@ -118,7 +118,7 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
 
   // TODO wkpo NEXT: theorie: en fait le pointer vers l'arg est bon que la durée du call... regarder comment les flatmaps font? est-ce qu'on peut copier?
   // TODO wkpo
-  Sint i = signed_val(value);
+  Sint i = signed_val(wkpo);
   WK_DEBUG("apres get value %d", i);
 
   BIF_RET(wkpo);
