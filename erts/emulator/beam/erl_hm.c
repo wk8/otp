@@ -111,7 +111,7 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
   JLG(result, hm->j_array, hash);
   WK_DEBUG("apres get %d and %d and %d", hm->j_array, result, is_atom(*result));
   wkpo = *result;
-  BIF_RET(wkpo);
+  BIF_RET(mkatom("ben la..."));
 }
 // TODO wkpo
 // hm:get(wk, hm:set(wk, po, hm:new())).
