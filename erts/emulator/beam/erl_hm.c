@@ -86,7 +86,6 @@ BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
   Word_t Index;
   Word_t *PValue;
   Word_t NumIndexes = 10000; // default first parameter
-  if (argc > 1) NumIndexes = strtoul(argv[1], NULL, 0);
  // Load up the CPU cache for small measurements:
   for (Count = 0; Count < HASHSIZE; Count++) JArray[Count] = NULL;
  printf("Begin storing %lu random numbers in a Judy scalable hash array\n",
