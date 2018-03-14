@@ -93,8 +93,8 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   Word_t* jp;
 
   // TODO wkpo
-  Sint i = signed_val(value);
-  WK_DEBUG("on va set value %d", i);
+  // Sint i = signed_val(value);
+  // WK_DEBUG("on va set value %d", i);
 
   Uint32 hash = hashmap_make_hash(BIF_ARG_1);
   // TODO wkpo ca marche pas cette histoire la, collisions?
@@ -119,10 +119,10 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
 
   // TODO wkpo NEXT: theorie: en fait le pointer vers l'arg est bon que la durée du call... regarder comment les flatmaps font? est-ce qu'on peut copier?
   // TODO wkpo
-  Sint i = signed_val(*result);
-  WK_DEBUG("apres get value %d", i);
+  // Sint i = signed_val(*result);
+  // WK_DEBUG("apres get value %d", i);
 
-  BIF_RET(*result);
+  BIF_RET(result == NULL ? am_undefined : *result);
 }
 // TODO wkpo
 // hm:get(wk, hm:set(wk, 28, hm:new())).
