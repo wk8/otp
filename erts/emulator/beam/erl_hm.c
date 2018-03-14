@@ -101,8 +101,10 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
 
 BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
   Eterm result;
+  hashmap_t* hm;
+
+  hm = (hashmap_t*)hm_val(BIF_ARG_2);
   WK_DEBUG("avant get %d", hm->j_array);
-  hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_2);
 
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
   JLG(result, hm->j_array, hash);
