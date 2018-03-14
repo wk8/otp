@@ -31,14 +31,12 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
   Eterm* hp;
   hashmap_t *hm;
 
-  hp = HAlloc(BIF_P, (HM_HEADER_SIZE + 2)); // TODO wkpo +1 ?
+  hp = HAlloc(BIF_P, (HM_HEADER_SIZE + 3)); // TODO wkpo +1 ?
 
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HM;
-  hm->value = mkatom("coucou po");
-  // hm->j_array = (Pvoid_t) NULL;
+  hm->j_array = (Pvoid_t) NULL;
 
-  // BIF_RET(mkatom("coucou3")); // TODO wkpo
   BIF_RET(make_hm(hm));
 }
 
@@ -47,7 +45,7 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
 
   Uint32 hash = hashmap_make_hash(BIF_ARG_1);
   // TODO wkpo ca marche pas cette histoire la, collisions?
-  // JLI(BIF_ARG_2, hm->j_array, hash);
+  JLI(BIF_ARG_2, hm->j_array, hash);
 
   // TODO wkpo renvoyer la map plutot? BIF_RET(BIF_ARG_3) ?
   BIF_RET(am_ok);
@@ -58,7 +56,7 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
   hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_2);
 
   Uint32 hash = hashmap_make_hash(BIF_ARG_1);
-  // JLG(result, hm->j_array, hash);
+  JLG(result, hm->j_array, hash);
   BIF_RET(result);
 }
 // TODO wkpo
