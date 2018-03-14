@@ -54,7 +54,7 @@ BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
   hp = HAlloc(BIF_P, FLOAT_SIZE_OBJECT);
   res = make_float(hp);
 
-  FLOAT_VAL_GET_DOUBLE(0.28, a);
+  a.fd = 0.28;
   PUT_DOUBLE(a, hp);
 
   BIF_RET(res);
