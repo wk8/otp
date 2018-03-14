@@ -95,8 +95,7 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   JLI(BIF_ARG_2, hm->j_array, hash);
   WK_DEBUG("apres set %d", hm->j_array);
 
-  // TODO wkpo renvoyer la map plutot? BIF_RET(BIF_ARG_3) ?
-  BIF_RET(am_ok);
+  BIF_RET(BIF_ARG_3);
 }
 
 BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
