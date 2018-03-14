@@ -86,10 +86,11 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
   BIF_RET(make_hm(hm));
 }
 
+// TODO wkpo cleanup unused vars!!
 BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   hashmap_t* hm = (hashmap_t*)hm_val(BIF_ARG_3);
   Eterm value = BIF_ARG_2;
-  Eterm* p_value = &value;
+  Word_t* jp;
 
   // TODO wkpo
   Sint i = signed_val(value);
@@ -99,28 +100,30 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
   // TODO wkpo ca marche pas cette histoire la, collisions?
   WK_DEBUG("avant set %d", hm->j_array);
-  JLI(pi, hm->j_array, hash);
+  JLI(jp, hm->j_array, hash);
+  *jp = (Word_t*) value;
   WK_DEBUG("apres set %d", hm->j_array);
 
   BIF_RET(BIF_ARG_3);
 }
 
 BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
-  Sint* pi;
+  Eterm* result;
   hashmap_t* hm;
 
   hm = (hashmap_t*)hm_val(BIF_ARG_2);
   WK_DEBUG("avant get %d", hm->j_array);
 
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
-  JLG(pi, hm->j_array, hash);
+  JLG(result, hm->j_array, hash);
   WK_DEBUG("apres get %d", hm->j_array);
 
   // TODO wkpo NEXT: theorie: en fait le pointer vers l'arg est bon que la durée du call... regarder comment les flatmaps font? est-ce qu'on peut copier?
   // TODO wkpo
-  WK_DEBUG("apres get value %d", *pi);
+  Sint i = signed_val(*result);
+  WK_DEBUG("apres get value %d", i);
 
-  BIF_RET(make_small(*pi));
+  BIF_RET(*result);
 }
 // TODO wkpo
 // hm:get(wk, hm:set(wk, 28, hm:new())).
