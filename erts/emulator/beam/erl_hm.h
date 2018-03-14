@@ -6,6 +6,7 @@
 typedef struct hashmap_s {
     Eterm thing_word;
     // Pvoid_t j_array;
+    Eterm value; // TODO wkpo
 } hashmap_t;
 
 #define HM_HEADER_SIZE  (sizeof(hashmap_t) / sizeof(Eterm))
