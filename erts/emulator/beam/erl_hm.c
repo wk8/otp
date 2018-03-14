@@ -95,7 +95,7 @@ BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
   for (Count = 0; Count < NumIndexes; Count++)
   {
   Index = Random(Index);
-  JLI(PValue, JArray[Index % HASHSIZE], Index/HASHSIZE); 
+  JLI(PValue, JArray[Index % HASHSIZE], Index); 
   *PValue += 1; // bump count of duplicate Indexes
    }
    ENDTm;
@@ -106,7 +106,7 @@ BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
    for (Count = 0; Count < NumIndexes; Count++)
    {
    Index = Random(Index);
-   JLG(PValue, JArray[Index % HASHSIZE], Index/HASHSIZE);
+   JLG(PValue, JArray[Index % HASHSIZE], Index);
    if (*PValue != 1)
   printf("%lu dups of %lu\n", *PValue - 1, Index);
    }
