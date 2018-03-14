@@ -49,7 +49,7 @@ BIF_RETTYPE hm_get_1(BIF_ALIST_1) {
 BIF_RETTYPE hm_wk_0(BIF_ALIST_0) {
   Eterm* hp;
   Eterm res;
-  FloatDef a1;
+  FloatDef a;
 
   hp = HAlloc(BIF_P, FLOAT_SIZE_OBJECT);
   res = make_float(hp);
