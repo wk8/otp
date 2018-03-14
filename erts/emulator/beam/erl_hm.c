@@ -95,7 +95,7 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   // TODO wkpo ca marche pas cette histoire la, collisions?
   WK_DEBUG("avant set %d", hm->j_array);
   JLI(p_value, hm->j_array, hash);
-  WK_DEBUG("apres set %d", hm->j_array);
+  WK_DEBUG("apres set %d and %d", hm->j_array, p_value);
 
   BIF_RET(BIF_ARG_3);
 }
@@ -109,7 +109,7 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
 
   Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
   JLG(result, hm->j_array, hash);
-  WK_DEBUG("apres get %d", hm->j_array);
+  WK_DEBUG("apres get %d and %d", hm->j_array, result);
   BIF_RET(*result);
 }
 // TODO wkpo
