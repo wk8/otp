@@ -96,7 +96,7 @@ BIF_RETTYPE hm_set_3(BIF_ALIST_3) {
   Sint i = signed_val(value);
   WK_DEBUG("on va set value %d", i);
 
-  Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
+  Uint32 hash = hashmap_make_hash(BIF_ARG_1);
   // TODO wkpo ca marche pas cette histoire la, collisions?
   WK_DEBUG("avant set %d", hm->j_array);
   JLI(jp, hm->j_array, hash);
@@ -113,7 +113,7 @@ BIF_RETTYPE hm_get_2(BIF_ALIST_2) {
   hm = (hashmap_t*)hm_val(BIF_ARG_2);
   WK_DEBUG("avant get %d", hm->j_array);
 
-  Uint32 hash = 12; // TODO wkpo hashmap_make_hash(BIF_ARG_1);
+  Uint32 hash = hashmap_make_hash(BIF_ARG_1);
   JLG(result, hm->j_array, hash);
   WK_DEBUG("apres get %d", hm->j_array);
 
