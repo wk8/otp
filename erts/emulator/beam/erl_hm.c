@@ -31,9 +31,9 @@ BIF_RETTYPE hm_new_0(BIF_ALIST_0) {
   Eterm* hp;
   hashmap_t *hm;
 
-  BIF_RET(mkatom("coucou"));
-
   hp = HAlloc(BIF_P, (HM_HEADER_SIZE + 2)); // TODO wkpo +1 ?
+
+  BIF_RET(mkatom("coucou2"));
 
   hm = (hashmap_t*)hp;
   hm->thing_word = HEADER_HM;
